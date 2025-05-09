@@ -1,9 +1,15 @@
-const http = require('http')
-const server = http.createServer((req , res)=>{
-    
+const express = require('express')
+const bodyParse = require('body-parser')
 
+const app = express()
+const PORT = process.env.PORT || 3001
+
+app.use(bodyParse.json())
+
+app.get('/health', (req, res)=>{
+    res.status(200).send('Servidor funcionando correctamente')
 })
 
-server.listen(3001, ()=>{
-    console.log('Estoy vivo!!!')
+app.listen(PORT, ()=>{
+    console.log(`Servidor funcionando en el puerto ${PORT}`)
 })
