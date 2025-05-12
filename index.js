@@ -13,3 +13,8 @@ app.get('/health', (req, res)=>{
 app.listen(PORT, ()=>{
     console.log(`Servidor funcionando en el puerto ${PORT}`)
 })
+
+app.post('/webhook/mercadopago',(req, res)=>{
+    console.log('Webhook recibido: ',req.body)
+    res.status(200).send('OK')
+})
