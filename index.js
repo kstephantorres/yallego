@@ -14,14 +14,33 @@ app.listen(PORT, ()=>{
     console.log(`Servidor funcionando en el puerto ${PORT}`)
 })
 
-app.post('/webhook/mercadopago',(req, res)=>{
-    console.log('Webhook recibido: ',req.body)
-    res.status(200).send('OK')
+app.post('/webhook/mercadopago', async (req, res)=>{
+    try {
+        const data = req.body
+
+        if(data.type === 'payment' && data.action === 'payment.created')
+        {
+            console.log('Nueva transferencia recibida: ', data)
+
+            const paymentId = data.data.id
+            const paymentDetails = await getPaymentDetails(paymentId)
+
+            if(paymentDetails){
+                console.log('Detalle del pago: ', paymentDetails)
+            }
+
+        }
+        console.log('Webhook recibido... ')
+        res.status(200).send('OK')
+    } catch (error) {
+        console.error('Error procesando el webhook: ',error)
+        res.status(500).send('Error procesando el webhook')
+    }
 })
 
 const axios= require('axios')
 
-const getPaymentDetails = (paymentId)=>{
+const getPaymentDetails = async (paymentId)=>{
     try {
         console.log(`Obteniendo detalles del pago ${paymentId}...`)
         return {
@@ -39,3 +58,4 @@ const getPaymentDetails = (paymentId)=>{
         return null
     }
 }
+
