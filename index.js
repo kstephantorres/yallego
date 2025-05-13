@@ -26,7 +26,8 @@ app.post('/webhook/mercadopago', async (req, res)=>{
             const paymentDetails = await getPaymentDetails(paymentId)
 
             if(paymentDetails){
-                console.log('Detalle del pago: ', paymentDetails)
+                // console.log('Detalle del pago: ', paymentDetails)
+                await sendWhatsAppNotification(paymentDetails)
             }
 
         }
@@ -58,4 +59,22 @@ const getPaymentDetails = async (paymentId)=>{
         return null
     }
 }
+
+const sendWhatsAppNotification = async (paymentDetails) => {
+    const amount = paymentDetails.transaction_amount
+    const currency = paymentDetails.currency_id
+    const senderName = paymentDetails.payer.first_name + " "+ paymentDetails.payer.last_name 
+    const date = new Date(paymentDetails.date_created).toLocaleDateString
+
+    const message = `💰 *Nueva transferencia recibida*\n\n
+    Monto: ${amount} ${currency}\n
+    De: ${senderName}\n
+    Fecha: ${date}\n
+    ID: ${paymentDetails.id}
+    `
+    console.log('📱 MENSAJE DE WHATSAPP:');
+    console.log(message);
+    return true
+}
+
 
