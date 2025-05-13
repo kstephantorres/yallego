@@ -18,3 +18,24 @@ app.post('/webhook/mercadopago',(req, res)=>{
     console.log('Webhook recibido: ',req.body)
     res.status(200).send('OK')
 })
+
+const axios= require('axios')
+
+const getPaymentDetails = (paymentId)=>{
+    try {
+        console.log(`Obteniendo detalles del pago ${paymentId}...`)
+        return {
+      id: paymentId,
+      transaction_amount: 1500,
+      currency_id: "ARS",
+      payer: {
+        first_name: "Juan",
+        last_name: "Pérez"
+      },
+      date_created: new Date().toISOString()
+        }
+    } catch (error) {
+        console.log('Error: ', error)
+        return null
+    }
+}
