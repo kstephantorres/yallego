@@ -1,27 +1,17 @@
-const express = require('express')
+const app = require('./src/app')
 
-const {MercadoPagoConfig, Payment} = require('mercadopago')
-
-const app = express()
 const PORT = process.env.PORT || 3001
 
-app.use(express.json())
-
-app.get('/', (req, res)=>{
-    res.status(200).send('Servidor funcionando correctamente')
-})
+// app.use(express.json())
 
 app.listen(PORT, ()=>{
-    console.log(`Servidor funcionando en el puerto ${PORT}`)
+    console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
+    console.log(`📱 Bot de Telegram configurado`);
+    console.log(`💰 Webhook de MercadoPago activo en /webhook/mercadopago`);
 })
 
 
-const client = new MercadoPagoConfig({
-    accessToken: process.env.MERCADO_PAGO_ACCESS_TOKEN,
-    options: { timeout: 5000 }
-})
 
-const paymentService = new Payment(client);
 
 
 app.post('/webhook/mercadopago', async (req, res) => { 
