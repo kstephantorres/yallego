@@ -1,8 +1,8 @@
 class PaymentProcessor{
     static isBankTransfer(paymentData) {
         return paymentData.payment_type_id === 'bank_transfer' && 
-               paymentData.payment_method_id === 'cvu' && 
-               paymentData.payment_method_id === 'cbu';
+               (paymentData.payment_method_id === 'cvu' || 
+               paymentData.payment_method_id === 'cbu');
     }
 
     static isApproved(paymentData) {
