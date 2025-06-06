@@ -2,7 +2,7 @@
   "name": "yallego",
   "version": "1.0.0",
   "main": "index.js",
-  "type": "commonjs",
+  "type": "module",
   "scripts": {
     "dev": "node --env-file .env --watch index.js",
     "start": "node --env-file .env index.js",
@@ -14,7 +14,7 @@
   "description": "",
   "dependencies": {
     "axios": "^1.9.0",
-    "body-parser": "^2.2.0",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "mercadopago": "^2.7.0"
   }
 }
