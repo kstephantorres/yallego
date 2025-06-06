@@ -1,7 +1,7 @@
 const telegramService = require('../services/telegramService');
 const PaymentProcessor = require('../utils/paymentProcessor');
 
-class paymentController{
+class PaymentController{
 
     async handlePaymentNotification(req, res){
         try {

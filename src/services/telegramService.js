@@ -1,11 +1,11 @@
 const axios = require('axios')
 
-const TelegramService={
+class TelegramService {
     constructor(){
         this.botToken = process.env.TELEGRAM_BOT_TOKEN;
         this.chatId = process.env.TELEGRAM_CHAT_ID;
         this.baseUrl = `https://api.telegram.org/bot${this.botToken}`;
-    },
+    }
     async sendMessage(message){
         try {
             const response = await axios.post(`${this.baseUrl}/sendMessage`, {
@@ -20,7 +20,7 @@ const TelegramService={
             console.error('❌ Error enviando mensaje a Telegram:', error.response?.data || error.message);
             throw error;
         }
-    },
+    }
     formatPaymentMessage(paymentData){
         const {
             id,
