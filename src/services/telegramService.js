@@ -1,6 +1,6 @@
 const axios = require('axios')
 
-const telegramService={
+const TelegramService={
     constructor(){
         this.botToken = process.env.TELEGRAM_BOT_TOKEN;
         this.chatId = process.env.TELEGRAM_CHAT_ID;
